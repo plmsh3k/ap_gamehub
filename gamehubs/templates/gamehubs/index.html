@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "gamehubs/base.html" %}
+
+{% block page-header %}
+    <div class="jumbotron">
+        <h1 class="display-3">Play what you love. Become the best.</h1>
+
+        <p class="lead">Register a new account now to start playing, or log in to view your profile!</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-lg btn-primary" href="{% url 'gamehubs:games' %}" role="button">Games &raquo;</a>
+        <a class="btn btn-lg btn-primary" href="{% url 'gamehubs:profile' %}" role="button">Profile &raquo;</a>
+        {% else %}
+        <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+        <a class="btn btn-lg btn-secondary" href="{% url 'users:login' %}" role="button">Log in &raquo;</a>
+    {% endif %}
+    </div>
+{% endblock page-header %}
+
+</body>
+</html>

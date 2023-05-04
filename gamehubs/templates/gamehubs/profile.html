@@ -1,0 +1,31 @@
+{% extends 'gamehubs/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">{{ request.user.username }}'s Profile</h1>
+
+        <h2 class="mt-5">High Scores:</h2>
+        {% if high_scores %}
+            <ul class="list-group mb-5">
+                {% for score in high_scores %}
+                    {% if score.game %}
+                        <li class="list-group-item">{{ score.game.name }} - {{ score.points }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No high scores yet.</p>
+        {% endif %}
+
+        <h2 class="mt-5">Past Games:</h2>
+        {% if past_games %}
+            <ul class="list-group mb-5">
+                {% for game in past_games %}
+                    <li class="list-group-item"><a href="{% url 'gamehubs:game_scores' game.id %}">{{ game.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No past games yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

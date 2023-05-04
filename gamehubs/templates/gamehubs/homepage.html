@@ -1,0 +1,23 @@
+{% extends 'gamehubs/base.html' %}
+
+{% block page_header %}
+    <h1 class="display-4">Games</h1>
+{% endblock page_header %}
+
+{% block content %}
+
+    <p class="lead">Games:</p>
+
+    <ul class="list-group">
+        {% for game in games %}
+            <li class="list-group-item">
+                <h3 class="mb-0">
+                    <a href="{% url 'gamehubs:game' game.id %}" class="text-decoration-none">{{ game }}</a>
+                </h3>
+            </li>
+        {% empty %}
+            <li class="list-group-item"><h3 class="mb-0">No games have been added yet.</h3></li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

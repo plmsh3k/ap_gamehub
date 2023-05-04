@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'gamehubs/base.html' %}
+{% block content %}
+    <p><a href="{% url 'gamehubs:game' game.id %}">{{ game }}</a></p>
+    <p>Add a new review: </p>
+    <form action="{% url 'gamehubs:new_review' game.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Add review</button>
+    </form>
+{% endblock content %}
+</body>
+</html>

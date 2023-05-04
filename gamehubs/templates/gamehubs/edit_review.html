@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'crazy_book_clubs/base.html' %}
+
+{% block content %}
+
+    <p><a href="{% url 'gamehubs:game' game.id %}">{{ game }}</a></p>
+    <p>Edit entry:</p>
+    <form action="{% url 'gamehubs:edit_review' review.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Save changes</button>
+    </form>
+
+{% endblock content %}
+</body>
+</html>

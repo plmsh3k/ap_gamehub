@@ -1,0 +1,48 @@
+{% extends 'gamehubs/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>{{ game.name }}</h1>
+                <p>Rating: {{ game.rating }}</p>
+
+                <form method="post" action="{% url 'gamehubs:game' game.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Play game</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h2>High Scores:</h2>
+                <ul class="list-group">
+                    {% for score in high_scores %}
+                        <li class="list-group-item">{{ score.username }}: {{ score.max_score }}</li>
+                    {% empty %}
+                        <li class="list-group-item">No high scores yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Reviews:</h2>
+
+                <a href="{% url 'gamehubs:new_review' game.id %}" class="btn btn-primary mb-3">New Review</a>
+
+                {% for review in reviews %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.rating }} - {{ review.user.username }}</h5>
+                        <p class="card-text">{{ review.review }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                    <p>No reviews yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
